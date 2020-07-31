@@ -17,23 +17,11 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: 300,
+        width: 400,
         backgroundColor: theme.palette.background.paper,
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
-        overflow: 'scroll',
-        height: '100%',
-        maxHeight: 500,
-        display: 'block'
-    },
-    header: {
-        padding: '12px 0',
-        borderBottom: '1px solid darkgrey'
-    },
-    content: {
-        padding: "12px 0",
-        overflow: 'scroll'
-    },
+      },
 }));
 
 
@@ -54,7 +42,7 @@ const Receta = ({receta}) => {
     }
 
     // mostrar los valores del context
-    const { guardarIdReceta } = useContext(ModalContext);
+    const { informacion, guardarIdReceta, guardarReceta} = useContext(ModalContext);
 
     return ( 
         <div className="col-md-4 mb-3">
@@ -81,11 +69,17 @@ const Receta = ({receta}) => {
                         open={open}
                         onClose={() => {
                             guardarIdReceta(null);
+                            guardarReceta({});
                             handleClose();
                         }}
                     >
                         <div style={modalStyle} className={clases.paper}>
-                            <h1>Desde Modal</h1>
+                            <h2>{informacion.strDrink}</h2>
+                            <h2 className="mt-4">Instrucciones</h2>
+                            <p>
+                                {informacion.strInstructions}
+                            </p>
+                            <img className="img-fluid my-4" src={informacion.strDrinkThumb}/>
                         </div>
                     </Modal>
 
